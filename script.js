@@ -8,7 +8,7 @@ const watchInput = document.querySelector(".stopInput");
 const timerFooter = document.querySelector(".timerFooter");
 const StopFooter = document.querySelector(".stopFooter");
 const watchStartBout = document.querySelector("#watchStart");
-const watchStopBout = document.querySelector("#stopReset");
+const resetWatchBout = document.querySelector("#stopReset");
 
 let curentTime = 0;
 let interval = null;
@@ -33,24 +33,21 @@ Timer.addEventListener("click", () => {
 });
 
 watchStartBout.addEventListener("click", startWatch);
-watchStopBout.addEventListener("click", reset);
+resetWatchBout.addEventListener("click", reset);
 
 function startWatch() {
   if (watchStartBout.textContent === "START") {
     watchStartBout.textContent = "STOP";
-
-    if (interval) {
-      return;
-    }
     interval = setInterval(timer, 1000);
   } else {
+    clearInterval(interval);
     watchStartBout.textContent = "START";
   }
 }
 
 // function to increase the time
 function timer() {
-    curentTime++;
+  curentTime++;
   //Time Format
   let hrs = Math.floor(curentTime / 3600);
   let mins = Math.floor((curentTime - hrs * 3600) / 60);
@@ -67,5 +64,10 @@ function timer() {
 function reset() {
   stop();
   curentTime = 0;
-  watchInput.innerText = "00 00 00";
+  watchInput.value = "00 00 00";
+}
+
+function stop() {
+  clearInterval(interval);
+  interval = null;
 }
