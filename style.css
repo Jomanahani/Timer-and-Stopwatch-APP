@@ -62,6 +62,8 @@ section input {
   background-color: transparent;
   outline: none;
   border: none;
+}
+.timeInput {
   direction: rtl;
 }
 .stopSec {
