@@ -26,7 +26,10 @@
     </nav>
     <main class="main">
       <section class="timerSec">
-        <input type="text" class="timeInput" placeholder="00h 00m 00s" />
+        <div class="lowerDiv">00h 00m 00s</div>
+        <input type="hidden" class="timeInput"/>
+        <div class="timeDiv">5m 00s</div>
+        <div class="timeLine"></div>
       </section>
       <section class="stopSec">
         <input type="text" class="stopInput" placeholder="0s 00" />
@@ -34,8 +37,8 @@
     </main>
     <footer>
       <section class="timerFooter">
-        <button class="st">STOP</button>
-        <button class="reset">RESET</button>
+        <button id="timeStart" class="st">STOP</button>
+        <button id="timeReset" class="reset">RESET</button>
       </section>
       <section class="stopFooter">
         <button id="watchStart" class="st">START</button>
