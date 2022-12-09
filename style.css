@@ -46,6 +46,7 @@ nav i {
 /* start main */
 main {
   width: 40rem;
+  height: 10rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -63,8 +64,22 @@ section input {
   outline: none;
   border: none;
 }
-.timeInput {
+.timerSec div{
   direction: rtl;
+  text-align: center;
+  margin: 2rem 1rem;
+  padding: 1.2rem 0;
+  width: 15rem;
+  font-size: 2.5rem;
+}
+.lowerDiv{
+  color: rgb(98, 91, 91);
+  border-bottom: 1px solid #8ab4f8;
+  display: none;
+}
+.timeDiv {
+  color: white;
+  border-bottom: 1px solid #4d5054e8;
 }
 .stopSec {
   display: none;

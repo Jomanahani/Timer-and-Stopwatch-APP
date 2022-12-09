@@ -3,6 +3,11 @@ const Timer = document.querySelector(".timer");
 const Stopwatch = document.querySelector(".stopwatch");
 const main = document.querySelector(".main");
 const timerSection = document.querySelector(".timerSec");
+const lowerDiv = document.querySelector(".lowerDiv");
+const timeInput = document.querySelector(".timeInput");
+const timeDiv = document.querySelector(".timeDiv");
+const timeStartBout = document.querySelector("#timeStart");
+const timeResetBout = document.querySelector("#timeReset");
 const StopwatchSection = document.querySelector(".stopSec");
 const watchInput = document.querySelector(".stopInput");
 const timerFooter = document.querySelector(".timerFooter");
@@ -12,8 +17,10 @@ const resetWatchBout = document.querySelector("#stopReset");
 
 let curentTime = 0;
 let interval = null;
+let startTime = 0;
+let remainTime = 0;
 
-// add event listeners
+// add event listener to switch (timer and stopwatch)
 Stopwatch.addEventListener("click", () => {
   Timer.classList.remove("active");
   Stopwatch.classList.add("active");
@@ -32,6 +39,38 @@ Timer.addEventListener("click", () => {
   timerFooter.style.display = "block";
 });
 
+// -------------------------TIMER----------------------------
+// add event listeners for Timer buttons
+
+timeStartBout.addEventListener("click", startTimerButt);
+timeResetBout.addEventListener("click", reset);
+
+function startTimerButt() {
+  if (timeStartBout.textContent === "STOP") {
+    timeStartBout.textContent = "START";
+
+  } else {
+
+    timeStartBout.textContent = "STOP";
+  }
+}
+
+function timeCountDown(){
+  if(timeStartBout.textContent==="STOP"){
+    interval = setInterval(()=>{
+
+    },1000)
+  }
+} 
+
+timeDiv.onclick=()=>{
+  timeDiv.style.display="none"
+  lowerDiv.style.display="block"
+
+  
+}
+// ----------------------STOPWATCH----------------------------
+// add event listeners for stopwatch buttons
 watchStartBout.addEventListener("click", startWatch);
 resetWatchBout.addEventListener("click", reset);
 
@@ -44,8 +83,7 @@ function startWatch() {
     watchStartBout.textContent = "START";
   }
 }
-
-// function to increase the time
+// function to increase the time (stopwatch)
 function timer() {
   curentTime++;
   //Time Format
@@ -60,7 +98,7 @@ function timer() {
   watchInput.value = `${hrs}h ${mins}m ${secs}s`;
 }
 
-// function to reset the time
+// function to reset the time (stopwatch)
 function reset() {
   stop();
   curentTime = 0;
