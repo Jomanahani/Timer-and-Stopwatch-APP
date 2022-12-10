@@ -3,7 +3,7 @@ const Timer = document.querySelector(".timer");
 const Stopwatch = document.querySelector(".stopwatch");
 const main = document.querySelector(".main");
 const timerSection = document.querySelector(".timerSec");
-const lowerDiv = document.querySelector(".lowerDiv");
+// const lowerDiv = document.querySelector(".lowerDiv");
 const timeInput = document.querySelector(".timeInput");
 const timeDiv = document.querySelector(".timeDiv");
 const timeStartBout = document.querySelector("#timeStart");
@@ -43,32 +43,41 @@ Timer.addEventListener("click", () => {
 // add event listeners for Timer buttons
 
 timeStartBout.addEventListener("click", startTimerButt);
-timeResetBout.addEventListener("click", reset);
+timeResetBout.onclick =()=>{
+  clearInterval(interval);
+  interval = null;
+  timeDiv.children[0].textContent =" 05m ";
+  timeDiv.children[1].textContent =" 00s ";
+};
 
 function startTimerButt() {
+  let mins = parseInt(timeDiv.children[0].textContent.slice(1, 3));
+  let sec = parseInt(timeDiv.children[1].textContent.slice(1, 3));
   if (timeStartBout.textContent === "STOP") {
+    stop();
     timeStartBout.textContent = "START";
-
   } else {
-
+    if (sec == 0) {
+      --mins;
+      timeDiv.children[0].textContent = `${mins < 10 ? "0" + mins : mins}m`;
+      timeDiv.children[1].textContent = ` 59s `;
+      sec = 59;
+    }
+    interval = setInterval(() => {
+      sec = sec - 1;
+      if (sec <= 0 && mins > 0) {
+        --mins;
+        timeDiv.children[0].textContent = `${mins < 10 ? "0" + mins : mins}m `;
+        sec = 59;
+      } else if (sec <= 0) {
+        stop();
+      }
+      timeDiv.children[1].textContent = `${sec < 10 ? "0" + sec : sec}s `;
+    }, 1000);
     timeStartBout.textContent = "STOP";
   }
 }
 
-function timeCountDown(){
-  if(timeStartBout.textContent==="STOP"){
-    interval = setInterval(()=>{
-
-    },1000)
-  }
-} 
-
-timeDiv.onclick=()=>{
-  timeDiv.style.display="none"
-  lowerDiv.style.display="block"
-
-  
-}
 // ----------------------STOPWATCH----------------------------
 // add event listeners for stopwatch buttons
 watchStartBout.addEventListener("click", startWatch);
